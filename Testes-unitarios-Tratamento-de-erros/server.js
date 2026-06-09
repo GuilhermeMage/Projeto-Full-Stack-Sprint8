@@ -1,6 +1,9 @@
 import app from './src/app.js';
 import 'dotenv/config';
 import {logger} from './src/utils/logger.js'
+import cors from "cors";
+
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
