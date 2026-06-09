@@ -1,5 +1,5 @@
 const API_URL =
-  "https://testes-unitarios-tratamento-de-erros.onrender.com";
+  "https://projeto-full-stack-sprint8.onrender.com";
 
 export async function getProdutos() {
   const response = await fetch(`${API_URL}/produtos`);
