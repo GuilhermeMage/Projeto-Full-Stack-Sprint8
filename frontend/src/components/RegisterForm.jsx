@@ -33,41 +33,50 @@ function RegisterForm({ aoRegistrar }) {
   }
 
   return (
-    <div>
+    <div className="form-section">
       <h2>Criar conta</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={nome}
-          onChange={(event) => setNome(event.target.value)}
-          required
-        />
+      <form className="form" onSubmit={handleSubmit}>
+        <label>
+          Nome
+          <input
+            type="text"
+            placeholder="Digite seu nome"
+            value={nome}
+            onChange={(event) => setNome(event.target.value)}
+            required
+          />
+        </label>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
+        <label>
+          Email
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </label>
 
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(event) => setSenha(event.target.value)}
-          required
-        />
+        <label>
+          Senha
+          <input
+            type="password"
+            placeholder="Crie uma senha"
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
+            required
+          />
+        </label>
 
-        <button type="submit" disabled={loading}>
+        <button className="button button-primary" type="submit" disabled={loading}>
           {loading ? "Cadastrando..." : "Cadastrar"}
         </button>
       </form>
 
-      {erro && <p>{erro}</p>}
-      {sucesso && <p>{sucesso}</p>}
+      {erro && <p className="message message-error">{erro}</p>}
+      {sucesso && <p className="message message-success">{sucesso}</p>}
     </div>
   );
 }

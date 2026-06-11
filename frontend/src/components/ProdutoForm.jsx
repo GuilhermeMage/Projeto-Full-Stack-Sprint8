@@ -36,34 +36,43 @@ function ProdutoForm({ aoCadastrar }) {
   }
 
   return (
-    <div>
-      <h2>Cadastrar produto</h2>
+    <section className="panel">
+      <div className="panel-header">
+        <p className="eyebrow">Novo produto</p>
+        <h2>Cadastrar produto</h2>
+      </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome do produto"
-          value={nome}
-          onChange={(event) => setNome(event.target.value)}
-          required
-        />
+      <form className="form" onSubmit={handleSubmit}>
+        <label>
+          Nome do produto
+          <input
+            type="text"
+            placeholder="Ex: Monitor"
+            value={nome}
+            onChange={(event) => setNome(event.target.value)}
+            required
+          />
+        </label>
 
-        <input
-          type="number"
-          placeholder="Preço"
-          value={preco}
-          onChange={(event) => setPreco(event.target.value)}
-          required
-        />
+        <label>
+          Preço
+          <input
+            type="number"
+            placeholder="Ex: 800"
+            value={preco}
+            onChange={(event) => setPreco(event.target.value)}
+            required
+          />
+        </label>
 
-        <button type="submit" disabled={loading}>
+        <button className="button button-primary" type="submit" disabled={loading}>
           {loading ? "Cadastrando..." : "Cadastrar produto"}
         </button>
       </form>
 
-      {erro && <p>{erro}</p>}
-      {sucesso && <p>{sucesso}</p>}
-    </div>
+      {erro && <p className="message message-error">{erro}</p>}
+      {sucesso && <p className="message message-success">{sucesso}</p>}
+    </section>
   );
 }
 

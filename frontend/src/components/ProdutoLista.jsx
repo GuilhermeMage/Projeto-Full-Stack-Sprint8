@@ -25,30 +25,41 @@ function ProdutoLista({ atualizar }) {
     carregarProdutos();
   }, [atualizar]);
 
-  if (loading) {
-    return <p>Carregando produtos...</p>;
-  }
-
-  if (erro) {
-    return <p>{erro}</p>;
-  }
-
   return (
-    <div>
-      <h2>Produtos cadastrados</h2>
+    <section className="panel product-panel">
+      <div className="panel-header">
+        <p className="eyebrow">Banco de dados</p>
+        <h2>Produtos cadastrados</h2>
+      </div>
 
-      {produtos.length === 0 ? (
-        <p>Nenhum produto cadastrado.</p>
-      ) : (
-        <ul>
-          {produtos.map((produto) => (
-            <li key={produto.id}>
-              {produto.nome} - R$ {Number(produto.preco).toFixed(2)}
-            </li>
-          ))}
-        </ul>
+      {loading && <p className="state-text">Carregando produtos...</p>}
+
+      {erro && <p className="message message-error">{erro}</p>}
+
+      {!loading && !erro && produtos.length === 0 && (
+        <div className="empty-state">
+          <strong>Nenhum produto cadastrado</strong>
+          <p>Cadastre um produto para visualizar ele nesta lista.</p>
+        </div>
       )}
-    </div>
+
+      {!loading && !erro && produtos.length > 0 && (
+        <div className="product-list">
+          {produtos.map((produto) => (
+            <article className="product-card" key={produto.id}>
+              <div>
+                <span className="product-id">#{produto.id}</span>
+                <h3>{produto.nome}</h3>
+              </div>
+
+              <strong className="product-price">
+                R$ {Number(produto.preco).toFixed(2)}
+              </strong>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 

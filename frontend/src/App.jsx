@@ -3,6 +3,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import ProdutoLista from "./components/ProdutoLista";
 import ProdutoForm from "./components/ProdutoForm";
+import "./App.css";
 
 function App() {
   const usuarioSalvo = localStorage.getItem("usuario");
@@ -26,43 +27,81 @@ function App() {
 
   if (!usuario) {
     return (
-      <main>
-        <h1>Sprint 8 - Autenticação JWT</h1>
+      <main className="page auth-page">
+        <section className="auth-card">
+          <div className="brand">
+            <span className="brand-badge">S8</span>
+            <div>
+              <p className="eyebrow">Sprint 8</p>
+              <h1>Autenticação JWT</h1>
+            </div>
+          </div>
 
-        {mostrarCadastro ? (
-          <>
-            <RegisterForm aoRegistrar={() => setMostrarCadastro(false)} />
+          <p className="subtitle">
+            Acesse sua conta para visualizar e cadastrar produtos com segurança.
+          </p>
 
-            <p>Já tem conta?</p>
-            <button onClick={() => setMostrarCadastro(false)}>
-              Ir para login
-            </button>
-          </>
-        ) : (
-          <>
-            <LoginForm aoLogar={setUsuario} />
+          {mostrarCadastro ? (
+            <>
+              <RegisterForm aoRegistrar={() => setMostrarCadastro(false)} />
 
-            <p>Ainda não tem conta?</p>
-            <button onClick={() => setMostrarCadastro(true)}>
-              Criar conta
-            </button>
-          </>
-        )}
+              <div className="form-footer">
+                <p>Já tem conta?</p>
+                <button
+                  className="button button-secondary"
+                  onClick={() => setMostrarCadastro(false)}
+                >
+                  Ir para login
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <LoginForm aoLogar={setUsuario} />
+
+              <div className="form-footer">
+                <p>Ainda não tem conta?</p>
+                <button
+                  className="button button-secondary"
+                  onClick={() => setMostrarCadastro(true)}
+                >
+                  Criar conta
+                </button>
+              </div>
+            </>
+          )}
+        </section>
       </main>
     );
   }
 
   return (
-    <main>
-      <h1>Sprint 8 - Produtos</h1>
+    <main className="page dashboard-page">
+      <header className="dashboard-header">
+        <div>
+          <p className="eyebrow">Painel administrativo</p>
+          <h1>Produtos</h1>
+          <p className="subtitle">
+            Gerencie produtos conectados à API com autenticação JWT.
+          </p>
+        </div>
 
-      <p>Usuário logado: {usuario.nome}</p>
+        <div className="user-card">
+          <div>
+            <span className="user-label">Usuário logado</span>
+            <strong>{usuario.nome}</strong>
+          </div>
 
-      <button onClick={sair}>Sair</button>
+          <button className="button button-danger" onClick={sair}>
+            Sair
+          </button>
+        </div>
+      </header>
 
-      <ProdutoForm aoCadastrar={atualizarLista} />
-
-      <ProdutoLista atualizar={atualizar} />
+      <section className="dashboard-grid">
+        <ProdutoForm aoCadastrar={atualizarLista} />
+        <ProdutoLista atualizar={atualizar} />
+      </section>
     </main>
   );
 }

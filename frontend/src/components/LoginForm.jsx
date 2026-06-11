@@ -28,32 +28,38 @@ function LoginForm({ aoLogar }) {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="form-section">
+      <h2>Entrar na conta</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
+      <form className="form" onSubmit={handleSubmit}>
+        <label>
+          Email
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </label>
 
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(event) => setSenha(event.target.value)}
-          required
-        />
+        <label>
+          Senha
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
+            required
+          />
+        </label>
 
-        <button type="submit" disabled={loading}>
+        <button className="button button-primary" type="submit" disabled={loading}>
           {loading ? "Entrando..." : "Entrar"}
         </button>
       </form>
 
-      {erro && <p>{erro}</p>}
+      {erro && <p className="message message-error">{erro}</p>}
     </div>
   );
 }
