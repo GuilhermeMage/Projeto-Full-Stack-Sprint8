@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: backend
+        working-directory: Testes-unitarios-Tratamento-de-erros
 
     steps:
       - name: Baixar código
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: Testes-unitarios-Tratamento-de-erros/package-lock.json
 
       - name: Instalar dependências
         run: npm install
