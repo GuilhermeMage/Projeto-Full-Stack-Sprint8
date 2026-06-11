@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { criarProduto } from "../services/api";
+import { registrarUsuario } from "../services/api";
 
-function ProdutoForm({ aoCadastrar }) {
+function RegisterForm({ aoRegistrar }) {
   const [nome, setNome] = useState("");
-  const [preco, setPreco] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,18 +17,14 @@ function ProdutoForm({ aoCadastrar }) {
       setErro("");
       setSucesso("");
 
-      const novoProduto = {
-        nome,
-        preco: Number(preco),
-      };
-
-      await criarProduto(novoProduto);
+      await registrarUsuario(nome, email, senha);
 
       setNome("");
-      setPreco("");
-      setSucesso("Produto cadastrado com sucesso!");
+      setEmail("");
+      setSenha("");
+      setSucesso("Usuário cadastrado com sucesso!");
 
-      aoCadastrar();
+      aoRegistrar();
     } catch (error) {
       setErro(error.message);
     } finally {
@@ -37,27 +34,35 @@ function ProdutoForm({ aoCadastrar }) {
 
   return (
     <div>
-      <h2>Cadastrar produto</h2>
+      <h2>Criar conta</h2>
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Nome do produto"
+          placeholder="Nome"
           value={nome}
           onChange={(event) => setNome(event.target.value)}
           required
         />
 
         <input
-          type="number"
-          placeholder="Preço"
-          value={preco}
-          onChange={(event) => setPreco(event.target.value)}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="Senha"
+          value={senha}
+          onChange={(event) => setSenha(event.target.value)}
           required
         />
 
         <button type="submit" disabled={loading}>
-          {loading ? "Cadastrando..." : "Cadastrar produto"}
+          {loading ? "Cadastrando..." : "Cadastrar"}
         </button>
       </form>
 
@@ -67,4 +72,4 @@ function ProdutoForm({ aoCadastrar }) {
   );
 }
 
-export default ProdutoForm;
+export default RegisterForm;

@@ -1,48 +1,69 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import ProdutoLista from "./components/ProdutoLista";
 import ProdutoForm from "./components/ProdutoForm";
 
-import { getProdutos } from "./services/api";
-
 function App() {
-  const [produtos, setProdutos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [erro, setErro] = useState("");
+  const usuarioSalvo = localStorage.getItem("usuario");
 
-  async function carregarProdutos() {
-    try {
-      setLoading(true);
+  const [usuario, setUsuario] = useState(
+    usuarioSalvo ? JSON.parse(usuarioSalvo) : null
+  );
 
-      const dados = await getProdutos();
+  const [atualizar, setAtualizar] = useState(0);
+  const [mostrarCadastro, setMostrarCadastro] = useState(false);
 
-      setProdutos(dados);
-      setErro("");
-    } catch (error) {
-      setErro("Erro ao carregar produtos");
-    } finally {
-      setLoading(false);
-    }
+  function atualizarLista() {
+    setAtualizar((valorAtual) => valorAtual + 1);
   }
 
-  useEffect(() => {
-    carregarProdutos();
-  }, []);
+  function sair() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    setUsuario(null);
+  }
+
+  if (!usuario) {
+    return (
+      <main>
+        <h1>Sprint 8 - Autenticação JWT</h1>
+
+        {mostrarCadastro ? (
+          <>
+            <RegisterForm aoRegistrar={() => setMostrarCadastro(false)} />
+
+            <p>Já tem conta?</p>
+            <button onClick={() => setMostrarCadastro(false)}>
+              Ir para login
+            </button>
+          </>
+        ) : (
+          <>
+            <LoginForm aoLogar={setUsuario} />
+
+            <p>Ainda não tem conta?</p>
+            <button onClick={() => setMostrarCadastro(true)}>
+              Criar conta
+            </button>
+          </>
+        )}
+      </main>
+    );
+  }
 
   return (
-    <>
-      <ProdutoForm
-        atualizarProdutos={carregarProdutos}
-      />
+    <main>
+      <h1>Sprint 8 - Produtos</h1>
 
-      <hr />
+      <p>Usuário logado: {usuario.nome}</p>
 
-      <ProdutoLista
-        produtos={produtos}
-        loading={loading}
-        erro={erro}
-      />
-    </>
+      <button onClick={sair}>Sair</button>
+
+      <ProdutoForm aoCadastrar={atualizarLista} />
+
+      <ProdutoLista atualizar={atualizar} />
+    </main>
   );
 }
 
