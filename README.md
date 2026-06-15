@@ -26,11 +26,18 @@ POST /produtos
 GET  /produtos/erro
 
 ## 🧠 O que aprendi:
-- Como criar testes para GET, POST e cenários de erro.
-- Como substituir console.log por Winston.
-- Como criar um middleware global de erro.
-- Como retornar erros em JSON sem quebrar o servidor.
+- Integração React + Node.js com autenticação JWT
+- Gerenciamento de token no localStorage e headers
+- Proteção de rotas (401 Unauthorized)
+- Planejamento estratégico com Design Thinking
+- Deploy full-stack no Render com Docker
+- Testes para GET, POST e cenários de erro.
+- Substituir console.log por Winston.
+- Criar um middleware global de erro.
+- Retornar erros em JSON sem quebrar o servidor.
 
 ## 🔗 Links:
 https://react.dev/reference/react
 https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch
+https://www.youtube.com/watch?v=r4gjCn2r-iw
+https://www.youtube.com/watch?v=QOGnkj3T_q0

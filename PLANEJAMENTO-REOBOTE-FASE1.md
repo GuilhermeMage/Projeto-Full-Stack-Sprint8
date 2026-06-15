@@ -18,6 +18,9 @@ A dor central é:
 * Falta de rastreabilidade sobre entrada, armazenamento e retirada.
 * Falta de integração entre operação física e sistema digital.
 
+Leia o artigo:
+https://medium.com/mercadolibre-tech/os-bastidores-android-dos-armaz%C3%A9ns-do-mercado-livre-86d77517c73c
+
 ### Usuários envolvidos
 
 * Operador de recebimento.
